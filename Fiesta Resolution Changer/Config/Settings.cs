@@ -53,7 +53,8 @@ namespace Fiesta_Resolution_Changer.Settings
 #endif
                 cmd.Items.Add(new ComboBoxItem()
                 {
-                    Content = res.Total.ToString()
+                    Content = res.Total.ToString(),
+                    Tag = res.Slim.ToString()
                 });
             }
         }
