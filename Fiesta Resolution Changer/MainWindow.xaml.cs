@@ -45,7 +45,7 @@ namespace Fiesta_Resolution_Changer
         {
             if(!File.Exists(Config.OptionsPath))
             {
-                MessageBoxResult ms = MessageBox.Show("Could not find Options.mco, do you want to search for it?", "Options.mco not Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult ms = MessageBox.Show("Could not find Option.mco, do you want to search for it?", "Option.mco not Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if(ms == MessageBoxResult.Yes)
                 {
                     OpenFileDialog fl = new OpenFileDialog()
@@ -68,10 +68,36 @@ namespace Fiesta_Resolution_Changer
                     Close();
                 }
             }
+            if (!File.Exists(Config.SoundOptionsPath))
+            {
+                MessageBoxResult ms = MessageBox.Show("Could not find OptionSound.mco, do you want to search for it?", "OptionSound.mco not Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (ms == MessageBoxResult.Yes)
+                {
+                    OpenFileDialog fl = new OpenFileDialog()
+                    {
+                        Filter = "OptionSound.mco (OptionSound.mco)|OptionSound.mco",
+                        Title = "Select OptionSound.mco",
+                        CheckFileExists = true,
+                        CheckPathExists = true,
+                        Multiselect = false
+                    };
+                    if (fl.ShowDialog() == true)
+                    {
+                        Config.SoundOptionsPath = fl.FileName;
+                    }
+                    else
+                    {
+                        Close();
+                    }
+                }
+                else
+                {
+                    Close();
+                }
+            }
         }
         private async Task M()
         {
-            cmbRatio.loadResx();
             MCOReader.Read();
             switch (Options.CharacterShadow)
             {
@@ -94,11 +120,12 @@ namespace Fiesta_Resolution_Changer
             chkVibrationEffect.IsChecked = Options.ScreenVibrationEffect;
             chkWindowMode.IsChecked = Options.WindowMode;
             chkAntialiasing.IsChecked = Convert.ToBoolean(Options.Antialiasing);
+            slSoundMaster.Value = OptionSound.masVol.limit(0, 100);
+            slSoundBGM.Value = OptionSound.bgmVol.limit(0, 100);
+            slSoundSFX.Value = OptionSound.sfxVol.limit(0, 100);
+            slSoundENV.Value = OptionSound.envVol.limit(0, 100);
+            cmbResolution.loadRes();
             tCurrentRes.Text = $"Current Resolution: {Options.X}x{Options.Y}";
-            foreach(ComboBoxItem it in cmbResolution.Items)
-            {
-                if (it.Content == $"{Options.X}x{Options.Y}") it.IsSelected = true;
-            }
 
             //Disable those who dont work.
             chkAntialiasing.IsEnabled = false;
@@ -128,7 +155,7 @@ namespace Fiesta_Resolution_Changer
         {
             ComboBoxItem m = ((ComboBoxItem)((ComboBox)sender).SelectedItem);
             tCurrentRes.Text = $"Current Resolution: {m.Content}";
-            string[] res = m.Content.ToString().Split('x');
+            string[] res = m.Tag.ToString().Split('x');
             Options.X = short.TryParse(res[0], out short X) ? X : (short)800;
             Options.Y = short.TryParse(res[1], out short Y) ? Y : (short)600;
         }
@@ -141,6 +168,10 @@ namespace Fiesta_Resolution_Changer
             Options.ScreenVibrationEffect = chkVibrationEffect.IsChecked == true;
             Options.WindowMode = chkWindowMode.IsChecked == true;
             Options.ShowInterface = Convert.ToInt16(chkShowInterface.IsChecked == true);
+            OptionSound.masVol = Convert.ToInt16(slSoundMaster.Value).limit(0, 100);
+            OptionSound.bgmVol = Convert.ToInt16(slSoundBGM.Value).limit(0, 100);
+            OptionSound.sfxVol = Convert.ToInt16(slSoundSFX.Value).limit(0, 100);
+            OptionSound.envVol = Convert.ToInt16(slSoundENV.Value).limit(0, 100);
             MCOWriter.Write();
         }
 

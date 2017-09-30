@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Fiesta_Resolution_Changer.Classes;
+using System.Diagnostics;
 
 namespace Fiesta_Resolution_Changer.Settings
 {
@@ -11,6 +13,7 @@ namespace Fiesta_Resolution_Changer.Settings
     {
         public static string BaseDir = AppDomain.CurrentDomain.BaseDirectory;
         public static string OptionsPath = BaseDir + "\\ressystem\\Option.mco";
+        public static string SoundOptionsPath = BaseDir + "\\ressystem\\OptionSound.mco";
     }
     public enum Ratio : int
     {
@@ -41,36 +44,26 @@ namespace Fiesta_Resolution_Changer.Settings
         }
         public static void loadRes(this ComboBox cmd, Ratio rat = Ratio.WideScreen)
         {
-            List<string> resolutions = new List<string>();
-            string r = string.Empty;
-            switch(rat)
-            {
-                case Ratio.UltraWideScreen:
-                    {
-                        r = Properties.Resources._16x10;
-                        break;
-                    }
-                case Ratio.BlockScreen:
-                    {
-                        r = Properties.Resources._4x3;
-                        break;
-                    }
-                case Ratio.WideScreen:
-                default:
-                    {
-                        r = Properties.Resources._16x9;
-                        break;
-                    }
-            }
-            resolutions = r.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            Resolutions sRes = new Resolutions(System.Windows.Forms.Screen.PrimaryScreen.DeviceName);
             cmd.Items.Clear();
-            foreach(string res in resolutions)
+            foreach(Resolutions.ScreenResolution res in sRes.ScreenResolutions)
             {
+#if DEBUG
+                Debug.WriteLine(res.Total.ToString());
+#endif
                 cmd.Items.Add(new ComboBoxItem()
                 {
-                    Content = res
+                    Content = res.Total.ToString()
                 });
             }
+        }
+        public static int limit(this int i, int min, int max, int Default = 0)
+        {
+            return i > max || i < min ? Default : i;
+        }
+        public static short limit(this short i, short min, short max, short Default = 0)
+        {
+            return i > max || i < min ? Default : i;
         }
     }
 }

@@ -19,4 +19,11 @@ namespace Fiesta_Resolution_Changer.Classes
         public static bool CharacterEffect { get; set; }
         public static Int16 ShowInterface { get; set; }
     }
+    class OptionSound
+    {
+        public static Int16 masVol { get; set; }
+        public static Int16 bgmVol { get; set; }
+        public static Int16 sfxVol { get; set; }
+        public static Int16 envVol { get; set; }
+    }
 }

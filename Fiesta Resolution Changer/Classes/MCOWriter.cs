@@ -58,6 +58,32 @@ namespace Fiesta_Resolution_Changer.Classes
 
                 bWriter.Dispose();
                 bWriter.Close();
+
+                //OptionSound.mco
+                lPos = 0;
+                bWriter = new BinaryWriter((Stream)File.Open(Config.SoundOptionsPath, FileMode.Open, FileAccess.Write));
+                while (bWriter.BaseStream.Position != bWriter.BaseStream.Length)
+                {
+                    bWriter.BaseStream.Seek(lPos, SeekOrigin.Begin);
+                    switch (Enum.Parse(typeof(MCOEnum), lPos.ToString()))
+                    {
+                        case MCOEnum.MasterVolume:
+                            bWriter.Write(OptionSound.masVol);
+                            break;
+                        case MCOEnum.BGMVolume:
+                            bWriter.Write(OptionSound.bgmVol);
+                            break;
+                        case MCOEnum.SFXVolume:
+                            bWriter.Write(OptionSound.sfxVol);
+                            break;
+                        case MCOEnum.EnvVolume:
+                            bWriter.Write(OptionSound.envVol);
+                            break;
+                    }
+                    lPos++;
+                }
+                bWriter.Dispose();
+                bWriter.Close();
             }
             catch (Exception ex)
             {

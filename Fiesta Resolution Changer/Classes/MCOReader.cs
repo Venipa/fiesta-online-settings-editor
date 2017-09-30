@@ -59,6 +59,32 @@ namespace Fiesta_Resolution_Changer.Classes
 
                 bReader.Dispose();
                 bReader.Close();
+
+                //OptionSound.mco
+                lPos = 0;
+                bReader = new BinaryReader((Stream)File.Open(Config.OptionsPath, FileMode.Open, FileAccess.Read));
+                while (bReader.BaseStream.Position != bReader.BaseStream.Length)
+                {
+                    bReader.BaseStream.Seek(lPos, SeekOrigin.Begin);
+                    switch (Enum.Parse(typeof(MCOEnum), lPos.ToString()))
+                    {
+                        case MCOEnum.MasterVolume:
+                            OptionSound.masVol = bReader.ReadInt16();
+                            break;
+                        case MCOEnum.BGMVolume:
+                            OptionSound.bgmVol = bReader.ReadInt16();
+                            break;
+                        case MCOEnum.SFXVolume:
+                            OptionSound.sfxVol = bReader.ReadInt16();
+                            break;
+                        case MCOEnum.EnvVolume:
+                            OptionSound.envVol = bReader.ReadInt16();
+                            break;
+                    }
+                    lPos++;
+                }
+                bReader.Dispose();
+                bReader.Close();
             }
             catch (Exception ex)
             {
