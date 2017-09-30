@@ -1,0 +1,98 @@
+﻿<Window x:Class="Fiesta_Resolution_Changer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fiesta_Resolution_Changer"
+        mc:Ignorable="d"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Title="Fiesta Settings Editor" Height="465.283" Width="300" Icon="output (2).ico">
+    <Grid Margin="10">
+        <Canvas HorizontalAlignment="Left" Height="49" VerticalAlignment="Top" Width="51">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903913.png" Stretch="None"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="49" VerticalAlignment="Top" Width="51" Margin="229,0,0,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903914.png" Stretch="None"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="49" VerticalAlignment="Top" Width="178" Margin="51,0,0,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903912.png" Stretch="None">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="200"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="51" Margin="0,395,0,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903910.png" Stretch="None"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="51" Margin="229,395,0,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903911.png" Stretch="None"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="178" Margin="51,395,0,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903909.png" Stretch="None">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="200"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Canvas.Background>
+            <Button x:Name="btnSave" Content="Save" Canvas.Left="52" Canvas.Right="52" Canvas.Top="9" Width="75" Click="btnSave_Click" Height="22"/>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="346" Margin="0,49,0,0" VerticalAlignment="Top" Width="8">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903919.png"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="346" Margin="272,49,0,0" VerticalAlignment="Top" Width="8">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903920.png"/>
+            </Canvas.Background>
+        </Canvas>
+        <Canvas Margin="8,49,8,50">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Resources/903918.png"/>
+            </Canvas.Background>
+            <CheckBox x:Name="chkWindowMode" Content="Windowed" Canvas.Left="10" Canvas.Top="10" Width="244"/>
+            <CheckBox x:Name="chkCharEffect" Content="Character Effect" Canvas.Left="10" Canvas.Top="54" Width="244"/>
+            <CheckBox x:Name="chkVibrationEffect" Content="Screen Vibration Effect" Canvas.Left="10" Canvas.Top="32" Width="244"/>
+            <CheckBox x:Name="chkCharGlowEffect" Content="Character Glow Effect" Canvas.Left="10" Canvas.Top="76" Width="244"/>
+            <CheckBox x:Name="chkCharOutlineEffect" Content="Character Outline Effect" Canvas.Left="10" Canvas.Top="98" Width="244"/>
+            <CheckBox x:Name="chkShowInterface" Content="Show Interface" Canvas.Left="10" Canvas.Top="120" Width="244"/>
+            <CheckBox x:Name="chkAntialiasing" Content="Antialiasing" Canvas.Left="10" Canvas.Top="142" Width="244"/>
+            <ComboBox x:Name="cmbRatio" Canvas.Left="10" Canvas.Top="254" Width="248" SelectionChanged="cmbRatio_SelectionChanged"/>
+            <ComboBox x:Name="cmbResolution" Canvas.Left="10" Canvas.Top="302" Width="248" SelectionChanged="cmbResolution_SelectionChanged"/>
+            <TextBlock Canvas.Left="10" Text="Aspect Ratio" Canvas.Top="233" Width="248"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Resolution" Canvas.Top="282" Width="248"/>
+            <TextBlock x:Name="tCurrentRes" Canvas.Left="10" TextAlignment="Center" Text="" Canvas.Top="327" Width="248"/>
+            <TextBlock Canvas.Left="10" Text="Character Shadow" Canvas.Top="190" Width="248"/>
+            <Slider x:Name="slCharShadow" IsSnapToTickEnabled="True" TickFrequency="1" Canvas.Left="10" Canvas.Top="210" Width="213" Maximum="3" Height="19" AutoToolTipPlacement="TopLeft" SmallChange="1" Cursor="Arrow" ValueChanged="slCharShadow_SizeChanged"/>
+            <TextBlock x:Name="tCharShadow" Canvas.Left="227" Text="x0" Canvas.Top="211" Width="31" Height="18" TextAlignment="Right"/>
+            <Separator Height="14" Canvas.Left="10" Margin="0" Canvas.Top="170" Width="244" RenderTransformOrigin="0.5,0.5" Background="#FF191919">
+            </Separator>
+        </Canvas>
+        <TextBlock Text="Fiesta Settings Editor" Margin="0, 0, 0, 0" Height="50" TextAlignment="Center" VerticalAlignment="Top" Foreground="#FFC5C5C5" Padding="0,15,0,0" MouseDown="TextBlock_MouseDown"/>
+        <Button Margin="0,14,8,0" Height="21" VerticalAlignment="Top" Click="Button_Click" HorizontalAlignment="Right" Width="20" Content="X"/>
+        <Button x:Name="btnInfo" Margin="0,14,30,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="20" Content="I" Click="btnInfo_Click"/>
+    </Grid>
+</Window>
