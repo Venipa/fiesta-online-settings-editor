@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using Fiesta_Resolution_Changer.Classes;
 using System.Diagnostics;
@@ -24,7 +22,7 @@ namespace Fiesta_Resolution_Changer.Settings
     public static class Extensions
     {
 
-        public static void loadResx(this ComboBox cmb)
+        public static void LoadResx(this ComboBox cmb)
         {
             List<string> words = Properties.Resources.ratios.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
             cmb.Items.Clear();
@@ -42,15 +40,15 @@ namespace Fiesta_Resolution_Changer.Settings
                 }
             }
         }
-        public static void loadRes(this ComboBox cmd, Ratio rat = Ratio.WideScreen)
+        public static void LoadRes(this ComboBox cmd, Ratio rat = Ratio.WideScreen)
         {
             Resolutions sRes = new Resolutions(System.Windows.Forms.Screen.PrimaryScreen.DeviceName);
             cmd.Items.Clear();
             foreach(Resolutions.ScreenResolution res in sRes.ScreenResolutions)
             {
-#if DEBUG
+            #if DEBUG
                 Debug.WriteLine(res.Total.ToString());
-#endif
+            #endif
                 cmd.Items.Add(new ComboBoxItem()
                 {
                     Content = res.Total.ToString(),
@@ -58,11 +56,11 @@ namespace Fiesta_Resolution_Changer.Settings
                 });
             }
         }
-        public static int limit(this int i, int min, int max, int Default = 0)
+        public static int Limit(this int i, int min, int max, int Default = 0)
         {
             return i > max || i < min ? Default : i;
         }
-        public static short limit(this short i, short min, short max, short Default = 0)
+        public static short Limit(this short i, short min, short max, short Default = 0)
         {
             return i > max || i < min ? Default : i;
         }

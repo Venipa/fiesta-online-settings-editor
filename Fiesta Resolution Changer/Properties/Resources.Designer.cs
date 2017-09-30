@@ -108,7 +108,7 @@ namespace Fiesta_Resolution_Changer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Equal / CodeDragon^For the base Source^https://www.elitepvpers.com/forum/members/7264719--q-.html ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Equal|For the base Source|https://www.elitepvpers.com/forum/members/7264719--q-.html ähnelt.
         /// </summary>
         internal static string contributors {
             get {
