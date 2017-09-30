@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Fiesta_Resolution_Changer.Settings;
 using Fiesta_Resolution_Changer.Classes;
 using System.IO;
@@ -32,21 +23,21 @@ namespace Fiesta_Resolution_Changer
             {
                 Exception ex = (Exception)e.ExceptionObject;
                 MessageBox.Show($"Error :: {ex.Message}", "Error occurred");
-#if DEBUG
+            #if DEBUG
                 Debug.WriteLine(ex);
-#else
+            #else
                 Application.Current.Shutdown();
-#endif
+            #endif
             };
             Check().Wait();
             M().Wait();
         }
         private async Task Check()
         {
-            if(!File.Exists(Config.OptionsPath))
+            if (!File.Exists(Config.OptionsPath))
             {
                 MessageBoxResult ms = MessageBox.Show("Could not find Option.mco, do you want to search for it?", "Option.mco not Found", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if(ms == MessageBoxResult.Yes)
+                if (ms == MessageBoxResult.Yes)
                 {
                     OpenFileDialog fl = new OpenFileDialog()
                     {
@@ -56,14 +47,16 @@ namespace Fiesta_Resolution_Changer
                         CheckPathExists = true,
                         Multiselect = false
                     };
-                    if(fl.ShowDialog() == true)
+                    if (fl.ShowDialog() == true)
                     {
                         Config.OptionsPath = fl.FileName;
-                    } else
+                    }
+                    else
                     {
                         Close();
                     }
-                } else
+                }
+                else
                 {
                     Close();
                 }
@@ -120,11 +113,11 @@ namespace Fiesta_Resolution_Changer
             chkVibrationEffect.IsChecked = Options.ScreenVibrationEffect;
             chkWindowMode.IsChecked = Options.WindowMode;
             chkAntialiasing.IsChecked = Convert.ToBoolean(Options.Antialiasing);
-            slSoundMaster.Value = OptionSound.masVol.limit(0, 100);
-            slSoundBGM.Value = OptionSound.bgmVol.limit(0, 100);
-            slSoundSFX.Value = OptionSound.sfxVol.limit(0, 100);
-            slSoundENV.Value = OptionSound.envVol.limit(0, 100);
-            cmbResolution.loadRes();
+            slSoundMaster.Value = OptionSound.masVol.Limit(0, 100);
+            slSoundBGM.Value = OptionSound.bgmVol.Limit(0, 100);
+            slSoundSFX.Value = OptionSound.sfxVol.Limit(0, 100);
+            slSoundENV.Value = OptionSound.envVol.Limit(0, 100);
+            cmbResolution.LoadRes();
             tCurrentRes.Text = $"Current Resolution: {Options.X}x{Options.Y}";
 
             //Disable those who dont work.
@@ -133,7 +126,7 @@ namespace Fiesta_Resolution_Changer
         }
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if(MouseButtonState.Pressed == e.LeftButton)
+            if (MouseButtonState.Pressed == e.LeftButton)
             {
                 DragMove();
             }
@@ -144,14 +137,14 @@ namespace Fiesta_Resolution_Changer
             Close();
         }
 
-        private void cmbRatio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CmbRatio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem m = ((ComboBoxItem)((ComboBox)sender).SelectedItem);
-            cmbResolution.loadRes((Ratio)int.Parse(m.Tag.ToString()));
-            
+            cmbResolution.LoadRes((Ratio)int.Parse(m.Tag.ToString()));
+
         }
 
-        private void cmbResolution_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CmbResolution_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxItem m = ((ComboBoxItem)((ComboBox)sender).SelectedItem);
             tCurrentRes.Text = $"Current Resolution: {m.Content}";
@@ -160,7 +153,7 @@ namespace Fiesta_Resolution_Changer
             Options.Y = short.TryParse(res[1], out short Y) ? Y : (short)600;
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             Options.CharacterEffect = chkCharEffect.IsChecked == true;
             Options.GlowEffect = Convert.ToInt16(chkCharGlowEffect.IsChecked == true);
@@ -168,14 +161,14 @@ namespace Fiesta_Resolution_Changer
             Options.ScreenVibrationEffect = chkVibrationEffect.IsChecked == true;
             Options.WindowMode = chkWindowMode.IsChecked == true;
             Options.ShowInterface = Convert.ToInt16(chkShowInterface.IsChecked == true);
-            OptionSound.masVol = Convert.ToInt16(slSoundMaster.Value).limit(0, 100);
-            OptionSound.bgmVol = Convert.ToInt16(slSoundBGM.Value).limit(0, 100);
-            OptionSound.sfxVol = Convert.ToInt16(slSoundSFX.Value).limit(0, 100);
-            OptionSound.envVol = Convert.ToInt16(slSoundENV.Value).limit(0, 100);
+            OptionSound.masVol = Convert.ToInt16(slSoundMaster.Value).Limit(0, 100);
+            OptionSound.bgmVol = Convert.ToInt16(slSoundBGM.Value).Limit(0, 100);
+            OptionSound.sfxVol = Convert.ToInt16(slSoundSFX.Value).Limit(0, 100);
+            OptionSound.envVol = Convert.ToInt16(slSoundENV.Value).Limit(0, 100);
             MCOWriter.Write();
         }
 
-        private void slCharShadow_SizeChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void SlCharShadow_SizeChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Slider s = (Slider)sender;
             switch (s.Value)
@@ -193,10 +186,10 @@ namespace Fiesta_Resolution_Changer
                     Options.CharacterShadow = 50;
                     break;
             }
-            tCharShadow.Text = $"x{s.Value+1}";
+            tCharShadow.Text = $"x{s.Value + 1}";
         }
 
-        private void btnInfo_Click(object sender, RoutedEventArgs e)
+        private void BtnInfo_Click(object sender, RoutedEventArgs e)
         {
             new Info().ShowDialog();
         }

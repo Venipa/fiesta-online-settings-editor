@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Fiesta_Resolution_Changer
 {
@@ -23,9 +16,9 @@ namespace Fiesta_Resolution_Changer
         public Info()
         {
             InitializeComponent();
-            loadContributors();
+            LoadContributors();
         }
-        private void loadContributors()
+        private void LoadContributors()
         {
             List<string> l = Properties.Resources.contributors.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
             foreach(string cont in l)
@@ -39,7 +32,7 @@ namespace Fiesta_Resolution_Changer
                 });
             }
         }
-        private void contributors_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Contributors_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (contributorlist.SelectedItem != null)
             {

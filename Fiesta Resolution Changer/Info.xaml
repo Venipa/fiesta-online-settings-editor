@@ -8,7 +8,7 @@
         ResizeMode="NoResize"
         Title="Info" Height="300" Width="400">
     <Grid Background="#FF151515">
-        <ListBox x:Name="contributorlist" Height="179" Margin="10,78,98,0" VerticalAlignment="Top" BorderBrush="#FFB39474" Foreground="#FFF0F0F0" MouseDoubleClick="contributors_MouseDoubleClick" FontSize="11" BorderThickness="1,0,0,0" Background="#0CFFFFFF" UseLayoutRounding="False"/>
+        <ListBox x:Name="contributorlist" Height="179" Margin="10,78,98,0" VerticalAlignment="Top" BorderBrush="#FFB39474" Foreground="#FFF0F0F0" MouseDoubleClick="Contributors_MouseDoubleClick" FontSize="11" BorderThickness="1,0,0,0" Background="#0CFFFFFF" UseLayoutRounding="False"/>
         <Image Source="Resources/ino.jpg" Stretch="UniformToFill" HorizontalAlignment="Right" Width="93"/>
         <Border BorderThickness="0" Margin="0,0,40,0" HorizontalAlignment="Right" Width="53">
             <Border.Background>

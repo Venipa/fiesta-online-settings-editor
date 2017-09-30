@@ -72,9 +72,11 @@ namespace Fiesta_Resolution_Changer.Classes
         public Resolutions(string devName)
         {
             deviceName = devName;
-            DEVMODE dm = new DEVMODE();
-            dm.dmDeviceName = new string(new char[32]);
-            dm.dmFormName = new string(new char[32]);
+            DEVMODE dm = new DEVMODE
+            {
+                dmDeviceName = new string(new char[32]),
+                dmFormName = new string(new char[32])
+            };
             dm.dmSize = Convert.ToInt16(Marshal.SizeOf(dm));
 
             int counter = 0;
@@ -82,10 +84,13 @@ namespace Fiesta_Resolution_Changer.Classes
             {
                 if (EnumDisplaySettings(deviceName, counter, ref dm) != 0)
                 {
-                    ScreenResolution sr = new ScreenResolution();
-                    sr.Total = dm.dmPelsWidth + " x " + dm.dmPelsHeight;
-                    sr.width = dm.dmPelsWidth;
-                    sr.height = dm.dmPelsHeight;
+                    ScreenResolution sr = new ScreenResolution
+                    {
+                        Total = dm.dmPelsWidth + " x " + dm.dmPelsHeight,
+                        width = dm.dmPelsWidth,
+                        height = dm.dmPelsHeight
+                    };
+
                     sr.Slim = sr.width + "x" + sr.height;
                     if (!ScreenRes.Contains(sr))
                     {
